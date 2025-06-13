@@ -59,17 +59,21 @@ def upsert_books_to_pinecone(books):
     print('done uploading')
 
 
-def chatbot_query(query_text, top_k=3):
+def chatbot_query(query_text, top_k=3, score_threshold=0.3):
     query_vector = model.encode(query_text).tolist()
     results = index.query(vector=query_vector, top_k=top_k, include_metadata=True)
 
-    if results and 'matches' in results and results['matches']:
+    matches = results.get('matches', [])
+    filtered_matches = [m for m in matches if m['score'] >= score_threshold]
+
+    if filtered_matches:
         response = 'Here are some books I found:\n'
-        for match in results['matches']:
+        for match in filtered_matches:
             meta = match['metadata']
             response += f"- \"{meta['title']}\" by {meta['author']} ({meta['year']}), Genre: {meta['genre']}\n"
     else:
-        response = 'Sorry, no books matched your query.'
+        response = 'Sorry, I couldn’t find any books that match what you’re looking for.'
+
     return response
 
 def main():

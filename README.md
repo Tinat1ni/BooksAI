@@ -40,5 +40,8 @@ Bot: Here are some books I found:
 - "The Birth of Tragedy" by Friedrich Nietzsche (1872.0), Genre: Philosophy
 - "Beyond Good and Evil" by Friedrich Nietzsche (1886.0), Genre: Philosophy
 
+You: do you have books about programming?
+Bot: Sorry, I couldn’t find any books that match what you’re looking for.
+
 You: exit
 👋 Goodbye!
