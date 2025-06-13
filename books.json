@@ -1,0 +1,213 @@
+[
+  {
+    "id": "1",
+    "title": "Thus Spoke Zarathustra",
+    "author": "Friedrich Nietzsche",
+    "genre": "Philosophy",
+    "year": 1883
+  },
+  {
+    "id": "2",
+    "title": "Beyond Good and Evil",
+    "author": "Friedrich Nietzsche",
+    "genre": "Philosophy",
+    "year": 1886
+  },
+  {
+    "id": "3",
+    "title": "The Stranger",
+    "author": "Albert Camus",
+    "genre": "Existential Fiction",
+    "year": 1942
+  },
+  {
+    "id": "4",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "genre": "Psychological Fiction",
+    "year": 1866
+  },
+  {
+    "id": "5",
+    "title": "The Brothers Karamazov",
+    "author": "Fyodor Dostoevsky",
+    "genre": "Philosophical Fiction",
+    "year": 1880
+  },
+  {
+    "id": "6",
+    "title": "The Myth of Sisyphus",
+    "author": "Albert Camus",
+    "genre": "Philosophy",
+    "year": 1942
+  },
+  {
+    "id": "7",
+    "title": "Nausea",
+    "author": "Jean-Paul Sartre",
+    "genre": "Existential Fiction",
+    "year": 1938
+  },
+  {
+    "id": "8",
+    "title": "Being and Nothingness",
+    "author": "Jean-Paul Sartre",
+    "genre": "Philosophy",
+    "year": 1943
+  },
+  {
+    "id": "9",
+    "title": "Notes from Underground",
+    "author": "Fyodor Dostoevsky",
+    "genre": "Philosophical Fiction",
+    "year": 1864
+  },
+  {
+    "id": "10",
+    "title": "Demian",
+    "author": "Hermann Hesse",
+    "genre": "Coming-of-Age",
+    "year": 1919
+  },
+  {
+    "id": "11",
+    "title": "Steppenwolf",
+    "author": "Hermann Hesse",
+    "genre": "Psychological Fiction",
+    "year": 1927
+  },
+  {
+    "id": "12",
+    "title": "Siddhartha",
+    "author": "Hermann Hesse",
+    "genre": "Philosophical Fiction",
+    "year": 1922
+  },
+  {
+    "id": "13",
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "genre": "Dystopian",
+    "year": 1932
+  },
+  {
+    "id": "14",
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "year": 1949
+  },
+  {
+    "id": "15",
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "genre": "Political Satire",
+    "year": 1945
+  },
+  {
+    "id": "16",
+    "title": "The Trial",
+    "author": "Franz Kafka",
+    "genre": "Absurdist Fiction",
+    "year": 1925
+  },
+  {
+    "id": "17",
+    "title": "The Metamorphosis",
+    "author": "Franz Kafka",
+    "genre": "Absurdist Fiction",
+    "year": 1915
+  },
+  {
+    "id": "18",
+    "title": "Lord of the Flies",
+    "author": "William Golding",
+    "genre": "Allegorical Novel",
+    "year": 1954
+  },
+  {
+    "id": "19",
+    "title": "The Plague",
+    "author": "Albert Camus",
+    "genre": "Philosophical Fiction",
+    "year": 1947
+  },
+  {
+    "id": "20",
+    "title": "A Clockwork Orange",
+    "author": "Anthony Burgess",
+    "genre": "Dystopian",
+    "year": 1962
+  },
+  {
+    "id": "21",
+    "title": "The Fountainhead",
+    "author": "Ayn Rand",
+    "genre": "Philosophical Fiction",
+    "year": 1943
+  },
+  {
+    "id": "22",
+    "title": "Atlas Shrugged",
+    "author": "Ayn Rand",
+    "genre": "Philosophical Fiction",
+    "year": 1957
+  },
+  {
+    "id": "23",
+    "title": "Walden",
+    "author": "Henry David Thoreau",
+    "genre": "Philosophy",
+    "year": 1854
+  },
+  {
+    "id": "24",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "genre": "Stoic Philosophy",
+    "year": 180
+  },
+  {
+    "id": "25",
+    "title": "The Republic",
+    "author": "Plato",
+    "genre": "Philosophy",
+    "year": -380
+  },
+  {
+    "id": "26",
+    "title": "Letters from a Stoic",
+    "author": "Seneca",
+    "genre": "Stoic Philosophy",
+    "year": 65
+  },
+  {
+    "id": "27",
+    "title": "The Prince",
+    "author": "Niccolò Machiavelli",
+    "genre": "Political Philosophy",
+    "year": 1532
+  },
+  {
+    "id": "28",
+    "title": "Leviathan",
+    "author": "Thomas Hobbes",
+    "genre": "Political Philosophy",
+    "year": 1651
+  },
+  {
+    "id": "29",
+    "title": "On the Genealogy of Morals",
+    "author": "Friedrich Nietzsche",
+    "genre": "Philosophy",
+    "year": 1887
+  },
+  {
+    "id": "30",
+    "title": "The Birth of Tragedy",
+    "author": "Friedrich Nietzsche",
+    "genre": "Philosophy",
+    "year": 1872
+  }
+]
+
