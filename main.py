@@ -47,7 +47,7 @@ def upsert_books_to_pinecone(books):
     """
     vectors = []
     for book in books:
-        text = f'{book['title']} by {book['author']}, Genre: {book['genre']}, Year: {book['year']}'
+        text = f"{book['title']} by {book['author']}, Genre: {book['genre']}, Year: {book['year']}"
         embedding = model.encode(text).tolist() # converting embedding to list for JSON compatibility
         vectors.append({
             'id': str(book['id']),
