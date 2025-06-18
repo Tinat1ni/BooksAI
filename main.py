@@ -8,24 +8,24 @@ load_dotenv()
 
 API_KEY = os.getenv('PINECONE_API_KEY')
 ENV = os.getenv('PINECONE_ENVIRONMENT')
-INDEX_NAME = os.getenv('PINECONE_INDEX')
+
+INDEXES = {
+    'title': 'title-index',
+    'author': 'author-index',
+    'genre': 'genre-index',
+}
 
 # initializing Pinecone client with API key
 pc = Pinecone(api_key=API_KEY)
 
-# checking if the pinecone index already exists
-# if not, creating it with the specified dimension (384 for all-MiniLM-L6-v2 embeddings),
-# similarity metric (cosine), and serverless spec (cloud provider and region)
-if INDEX_NAME not in pc.list_indexes().names():
-    pc.create_index(
-        name=INDEX_NAME,
-        dimension=384,
-        metric='cosine',
-        spec=ServerlessSpec(cloud='aws', region=ENV)
-    )
-
-# connecting to the existing or newly created index for querying and upserting vectors
-index = pc.Index(INDEX_NAME)
+for name in INDEXES.values():
+    if name not in pc.list_indexes():
+        pc.create_index(
+            name=name,
+            dimension=384,
+            metric='cosine',
+            spec=ServerlessSpec(cloud='aws', region=ENV)
+        )
 
 # loading embedding model
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -38,41 +38,47 @@ def load_books(file_path='books.json'):
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
+
 def upsert_books_to_pinecone(books):
-    """
-    for each book, we create a text description combining key metadata.
-    encode the text into an embedding vector.
-    prepare the vectors with metadata and upload them to the Pinecone index.
-    this enables semantic search over our book data
-    """
-    vectors = []
-    for book in books:
-        text = f"{book['title']} by {book['author']}, Genre: {book['genre']}, Year: {book['year']}"
-        embedding = model.encode(text).tolist() # converting embedding to list for JSON compatibility
-        vectors.append({
-            'id': str(book['id']),
-            'values': embedding,
-            'metadata': book
-        })
-    print(f'Upserting {len(vectors)} books')
-    index.upsert(vectors=vectors)
-    print('done uploading')
+    for key, index_name in INDEXES.items():
+        print(f'upserting to index: {index_name}')
+        idx = pc.Index(name=index_name)
+        vectors = []
+        for book in books:
+            text = book[key]
+            embedding = model.encode(text).tolist()
+            vectors.append({
+                'id': f"{key}-{book['id']}",
+                'values': embedding,
+                'metadata': book
+            })
+        idx.upsert(vectors=vectors)
+    print('all books upserted to all indexes.')
 
 
-def chatbot_query(query_text, top_k=3, score_threshold=0.3):
+def chatbot_query(query_text, top_k=3, score_threshold=0.5):
     query_vector = model.encode(query_text).tolist()
-    results = index.query(vector=query_vector, top_k=top_k, include_metadata=True)
+    all_matches = []
 
-    matches = results.get('matches', [])
-    filtered_matches = [m for m in matches if m['score'] >= score_threshold]
+    for key, index_name in INDEXES.items():
+        idx = pc.Index(index_name)
+        results = idx.query(vector=query_vector, top_k=top_k, include_metadata=True)
+        matches = results.get('matches', [])
+        all_matches.extend([m for m in matches if m['score'] >= score_threshold])
 
-    if filtered_matches:
-        response = 'Here are some books I found:\n'
-        for match in filtered_matches:
+    # sort combined matches by score, highest first
+    all_matches.sort(key=lambda x: x['score'], reverse=True)
+
+    if all_matches:
+        response = '📚 Here are some books I found:\n'
+        seen_ids = set()
+        for match in all_matches:
             meta = match['metadata']
-            response += f"- \"{meta['title']}\" by {meta['author']} ({meta['year']}), Genre: {meta['genre']}\n"
+            if meta['id'] not in seen_ids:
+                response += f"- \"{meta['title']}\" by {meta['author']} ({meta['year']}), Genre: {meta['genre']}\n"
+                seen_ids.add(meta['id'])
     else:
-        response = 'Sorry, I couldn’t find any books that match what you’re looking for.'
+        response = 'Sorry, no good matches found.'
 
     return response
 
@@ -92,9 +98,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
